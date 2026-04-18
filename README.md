@@ -2,7 +2,9 @@
 
 Description
 
-      The **NOVA Bank Management System** is a robust, terminal-based C++ application designed to simulate real-world banking workflows. It provides a secure and modular environment for managing user accounts, performing financial transactions, and maintaining persistent data storage using file-handling techniques.
+      The **NOVA Bank Management System** is a robust, terminal-based C++ application designed to simulate real-world banking workflows. It provides a secure and modular environment for managing
+      
+      user accounts, performing financial transactions, and maintaining persistent data storage using file-handling techniques.
 
       This project demonstrates core programming fundamentals including structured data management, modular software design, and secure input handling.
 
