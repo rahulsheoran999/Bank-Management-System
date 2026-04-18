@@ -2,27 +2,31 @@
 
 Description
 
-      Bank Management System is a C++-based application designed to manage core banking operations such as account creation,            
-      transactions, and user management.
-      
-      The system simulates real-world banking workflows and demonstrates concepts like file handling, object-oriented                   
-      programming, and modular design. It is suitable for learning backend logic and system design fundamentals.
+      The **NOVA Bank Management System** is a robust, terminal-based C++ application designed to simulate real-world banking workflows. It provides a secure and modular environment for managing user accounts, performing financial transactions, and maintaining persistent data storage using file-handling techniques.
 
-Features
+      This project demonstrates core programming fundamentals including structured data management, modular software design, and secure input handling.
+
+✨ Features
 
 👤 Account Management
 
-      Create new bank accounts
-      View account details
-      Update account information
-      Delete accounts
+      Create Account:** Generate unique account numbers (NOVA1001+) with automated timestamping.
+      
+      Account Details: View complete profiles including contact info, account type, and status.
+      
+      Change PIN: Securely update account access codes with identity verification.
+      
+      Close Account: Logic for soft-deleting/deactivating accounts.
 
 💰 Transaction Handling
 
-      Deposit money
-      Withdraw money
-      Check account balance
-      Transaction validation
+      Deposit & Withdraw: Real-time balance updates with a minimum balance enforcement (₹500).
+      
+      Fund Transfer: Transfer money between two internal accounts with dual-log updates.
+      
+      Transaction History: View a formatted chronological log of all deposits, withdrawals, and transfers.
+      
+      Mini Statement: Quick access to the most recent account activity.
 
 📄 Data Management
 
@@ -30,41 +34,45 @@ Features
       Read and update stored records
       Persistent storage without database
 
-🔐 Security (Basic)
+🔐 Security & Validation
 
-      Account number validation
-      Input validation to prevent errors
+      Masked PIN Input:** Prevents shoulder-surfing by hiding characters during entry.
+      
+      Identity Verification: Critical operations (Withdraw, Details, PIN 
+      change) require a multi-attempt PIN check.
+      Buffer Management: Robust input handling to prevent menu skipping and program crashes.
 
-🛠️ Tech Stack
 
-      Language: C++
-      Concepts Used:
-      Object-Oriented Programming (OOP)
-      File Handling
-      Modular Programming
 
 📂 Project Folder Structure
 
-      bank-management/
-      │ 
-      ├── main.cpp                # Entry point
+     bank-management/
       │
-      ├── include/               # Header files
-      │   ├── account.h
-      │   ├── transaction.h
-      │   └── utils.h
-      │
-      ├── src/                   # Source files
-      │   ├── account.cpp
-      │   ├── transaction.cpp
-      │   └── utils.cpp
-      │
-      ├── data/                  # Stored data files
-      │   └── accounts.txt
-      │
-      ├── build/                 # Compiled output
-      │
+      ├── main.cpp                # Entry point & Menu navigation
+      ├── include/                # Header files (.h)
+      │   ├── account.h           # Account logic declarations
+      │   ├── transaction.h       # Financial operation declarations
+      │   ├── filehandling.h      # Data persistence logic
+      │   ├── models.h            # Transaction & Account Structs
+      │   └── utils.h             # UI/UX & Helper tools
+      ├── src/                    # Implementation files (.cpp)
+      │   ├── account.cpp         
+      │   ├── transaction.cpp     
+      │   ├── filehandling.cpp    
+      │   └── utils.cpp           
+      ├── accounts.dat            # Persistent account database
+      ├── transactions.dat        # Persistent transaction ledger
       └── README.md
+
+🛠️ Tech Stack
+      
+      Language: C++11 or higher
+
+      Data Structures: Struct-based models for complex data mapping.
+
+      File Handling: Stream-based I/O for persistent .dat records.
+
+      Modular Programming: Separation of concerns across multiple source and header files.
 
 ⚙️ Installation & Setup
 
@@ -87,13 +95,15 @@ Features
 
       (Add screenshots of your program output here)
 
-🌱 Future Improvements 
+🌱 Future Improvements
 
-      Add GUI (using Qt or web frontend)
-      Database integration (MySQL / MongoDB)
-      User authentication system
-      Transaction history tracking
-      ATM simulation features
+      Encryption: Implement AES-256 encryption for PIN storage in .dat files.
+
+      Database Migration: Move from flat files to SQLite for better query performance.
+
+      Graphical Interface: Develop a GUI version using the Qt Framework.
+
+      Admin Dashboard: Add a "Manager Mode" to view bank-wide total liquidity and user stats.
       
 🤝 Contributing
 
@@ -102,8 +112,7 @@ Features
 
 👨‍💻 Author
 
-      Rahul
-      (Replace with your GitHub profile link)
+      Rahul C++ Developer & Tech Enthusiast
 
 📄 License
 
