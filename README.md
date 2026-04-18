@@ -12,7 +12,7 @@ Description
 
 👤 Account Management
 
-      Create Account:** Generate unique account numbers (NOVA1001+) with automated timestamping.
+      Create Account: Generate unique account numbers (NOVA1001+) with automated timestamping.
       
       Account Details: View complete profiles including contact info, account type, and status.
       
