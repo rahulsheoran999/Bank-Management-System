@@ -9,32 +9,32 @@ The system simulates real-world banking workflows and demonstrates concepts like
 🚀 Features
 
 👤 Account Management
-Create new bank accounts
-View account details
-Update account information
-Delete accounts
+      Create new bank accounts
+      View account details
+      Update account information
+      Delete accounts
 
 💰 Transaction Handling
-Deposit money
-Withdraw money
-Check account balance
-Transaction validation
+      Deposit money
+      Withdraw money
+      Check account balance
+      Transaction validation
 
 📄 Data Management
-Store account data using files
-Read and update stored records
-Persistent storage without database
+      Store account data using files
+      Read and update stored records
+      Persistent storage without database
 
 🔐 Security (Basic)
-Account number validation
-Input validation to prevent errors
+      Account number validation
+      Input validation to prevent errors
 
 🛠️ Tech Stack
-Language: C++
-Concepts Used:
-Object-Oriented Programming (OOP)
-File Handling
-Modular Programming
+      Language: C++
+      Concepts Used:
+      Object-Oriented Programming (OOP)
+      File Handling
+      Modular Programming
 
 📂 Project Folder Structure
 bank-management/
@@ -76,16 +76,16 @@ Data is saved automatically in files
 
 (Add screenshots of your program output here)
 
-🌱 Future Improvements
-Add GUI (using Qt or web frontend)
-Database integration (MySQL / MongoDB)
-User authentication system
-Transaction history tracking
-ATM simulation features
+🌱 Future Improvements 
+      Add GUI (using Qt or web frontend)
+      Database integration (MySQL / MongoDB)
+      User authentication system
+      Transaction history tracking
+      ATM simulation features
+      
 🤝 Contributing
-
-Contributions are welcome!
-Feel free to fork the repository and submit a pull request.
+      Contributions are welcome!
+      Feel free to fork the repository and submit a pull request.
 
 👨‍💻 Author
 
