@@ -2,9 +2,11 @@
 
 Description
 
-      Bank Management System is a C++-based application designed to manage core banking operations such as account creation,            transactions, and user management.
+      Bank Management System is a C++-based application designed to manage core banking operations such as account creation,            
+      transactions, and user management.
       
-      The system simulates real-world banking workflows and demonstrates concepts like file handling, object-oriented                   programming, and modular design. It is suitable for learning backend logic and system design fundamentals.
+      The system simulates real-world banking workflows and demonstrates concepts like file handling, object-oriented                   
+      programming, and modular design. It is suitable for learning backend logic and system design fundamentals.
 
 Features
 
