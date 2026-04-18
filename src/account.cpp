@@ -3,40 +3,31 @@
 #include "../include/filehandling.h"
 #include <iostream>
 
-using namespace std;
-
 const double MIN_BALANCE = 500.0;
 const int MAX_PIN_ATTEMPTS = 3;
 
 string generateAccNo(const vector<Account>& accounts) {
-    int maxNo = 1000;
-    for (const auto& a : accounts) {
-        try {
-            int n = stoi(a.accNo.substr(4));
-            if (n >= maxNo) maxNo = n + 1;
-        } catch (...) {}
-    }
+    // Generates a unique number based on total account count
+    int maxNo = 1000 + accounts.size();
     return "NOVA" + to_string(maxNo);
 }
 
 int findAccount(const vector<Account>& accounts, const string& accNo) {
     for (int i = 0; i < (int)accounts.size(); i++)
-        if (accounts[i].accNo == accNo) return i;
+        if (accounts[i].accNo == accNo && accounts[i].isActive) return i;
     return -1;
 }
 
 bool verifyPIN(const Account& acc) {
     for (int attempt = 1; attempt <= MAX_PIN_ATTEMPTS; attempt++) {
-        cout << YELLOW << "  Enter PIN (Attempt " << attempt << "/" << MAX_PIN_ATTEMPTS << "): " << RESET;
+        cout << YELLOW << "  Enter PIN: " << RESET;
         string pin = getMaskedInput();
         if (pin == acc.pin) return true;
-        cout << RED << "  ✗ Incorrect PIN!\n" << RESET;
+        cout << RED << "  ✗ Incorrect PIN (" << attempt << "/" << MAX_PIN_ATTEMPTS << ")\n" << RESET;
     }
-    cout << RED << "  ✗ Account locked!\n" << RESET;
+    cout << RED << "  ✗ Access Denied.\n" << RESET;
     return false;
 }
-
-// ---- COPY YOUR ORIGINAL FUNCTIONS EXACTLY BELOW ----
 
 void createAccount() {
     vector<Account> accounts = loadAccounts();
@@ -44,71 +35,62 @@ void createAccount() {
     a.accNo = generateAccNo(accounts);
     a.createdOn = getCurrentTime();
 
-    cout << "Name: "; getline(cin, a.holderName);
-    cout << "Email: "; getline(cin, a.email);
-    cout << "Phone: "; getline(cin, a.phone);
-
-    cout << "Deposit: ";
+    cout << "  Full Name: "; getline(cin, a.holderName);
+    cout << "  Email: "; getline(cin, a.email);
+    cout << "  Phone: "; getline(cin, a.phone);
+    cout << "  Account Type (Savings/Current): "; getline(cin, a.accType);
+    
+    cout << "  Initial Deposit (Min 500): ";
     cin >> a.balance; cin.ignore();
 
-    cout << "PIN: ";
+    if (a.balance < MIN_BALANCE) {
+        cout << RED << "  ✗ Error: Initial deposit must be at least 500.\n" << RESET;
+        return;
+    }
+
+    cout << "  Set 4-Digit PIN: ";
     a.pin = getMaskedInput();
 
     accounts.push_back(a);
     saveAccounts(accounts);
-
-    cout << "Account Created: " << a.accNo << endl;
+    cout << GREEN << "  ✓ Account Created! Your Account No: " << BOLD << a.accNo << RESET << endl;
 }
 
 void checkBalance() {
     string accNo;
-    cout << "Enter Acc No: ";
-    getline(cin, accNo);
-
+    cout << "  Enter Account Number: "; getline(cin, accNo);
     vector<Account> accs = loadAccounts();
     int idx = findAccount(accs, accNo);
-    if (idx == -1) return;
-
-    if (!verifyPIN(accs[idx])) return;
-
-    cout << "Balance: " << accs[idx].balance << endl;
+    if (idx != -1 && verifyPIN(accs[idx])) {
+        cout << CYAN << "  Current Balance: ₹" << accs[idx].balance << RESET << endl;
+    } else if (idx == -1) cout << RED << "  ✗ Account not found.\n" << RESET;
 }
 
 void displayAccountDetails() {
     string accNo;
-    getline(cin, accNo);
-
+    cout << "  Enter Account Number: "; getline(cin, accNo);
     vector<Account> accs = loadAccounts();
     int idx = findAccount(accs, accNo);
-    if (idx == -1) return;
-
-    if (!verifyPIN(accs[idx])) return;
-
-    cout << accs[idx].holderName << endl;
+    if (idx != -1 && verifyPIN(accs[idx])) {
+        printLine('-');
+        cout << "  NAME:    " << accs[idx].holderName << "\n";
+        cout << "  EMAIL:   " << accs[idx].email << "\n";
+        cout << "  PHONE:   " << accs[idx].phone << "\n";
+        cout << "  TYPE:    " << accs[idx].accType << "\n";
+        cout << "  OPENED:  " << accs[idx].createdOn << "\n";
+        printLine('-');
+    }
 }
 
 void changePIN() {
     string accNo;
-    getline(cin, accNo);
-
+    cout << "  Enter Account Number: "; getline(cin, accNo);
     vector<Account> accs = loadAccounts();
     int idx = findAccount(accs, accNo);
-    if (idx == -1) return;
-
-    cout << "New PIN: ";
-    accs[idx].pin = getMaskedInput();
-
-    saveAccounts(accs);
-}
-
-void closeAccount() {
-    string accNo;
-    getline(cin, accNo);
-
-    vector<Account> accs = loadAccounts();
-    int idx = findAccount(accs, accNo);
-    if (idx == -1) return;
-
-    accs[idx].isActive = false;
-    saveAccounts(accs);
+    if (idx != -1 && verifyPIN(accs[idx])) {
+        cout << "  Enter New PIN: ";
+        accs[idx].pin = getMaskedInput();
+        saveAccounts(accs);
+        cout << GREEN << "  ✓ PIN Updated Successfully!\n" << RESET;
+    }
 }
